@@ -1,23 +1,24 @@
 class Bottles
 
 	def get_variables(current)
-		@number_one = current
-		@number_two = current-1
-		@plural_one = 'bottles'
-		@plural_two = 'bottles'
+
+		# The default variables
+		@remaining_bottles_one = "#{current} bottles"
+		@remaining_bottles_two = "#{current-1} bottles"
 		@take_down = 'one'
 
-		if current == 1
-			@plural_one = 'bottle' 
-			@take_down = 'it'
-		end
-
-		if current - 1 == 1
-			@plural_two = 'bottle'
-		end
-
-		if current-1 == 0
-			@number_two = 'no more' 
+		# Update the variables for specific cases
+		case current
+			when 1
+				@remaining_bottles_one = '1 bottle'
+				@remaining_bottles_two = 'no more bottles'
+				@take_down = 'it'
+			when 2
+				@remaining_bottles_two = '1 bottle'
+			when 6
+				@remaining_bottles_one = '1 six-pack'
+			when 7
+				@remaining_bottles_two = '1 six-pack'
 		end
 	end
 
@@ -34,8 +35,8 @@ Go to the store and buy some more, 99 bottles of beer on the wall.
 
 		get_variables(current)
 
-		return "#{@number_one} #{@plural_one} of beer on the wall, #{@number_one} #{@plural_one} of beer.
-Take #{@take_down} down and pass it around, #{@number_two} #{@plural_two} of beer on the wall.
+		return "#{@remaining_bottles_one} of beer on the wall, #{@remaining_bottles_one} of beer.
+Take #{@take_down} down and pass it around, #{@remaining_bottles_two} of beer on the wall.
 "
 	end
 
